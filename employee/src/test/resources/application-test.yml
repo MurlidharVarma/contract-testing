@@ -1,0 +1,13 @@
+project:
+  host: "http://localhost:9999"
+  listById: "/project/employee/"
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:empdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+

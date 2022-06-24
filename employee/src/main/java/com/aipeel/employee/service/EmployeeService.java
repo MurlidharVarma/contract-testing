@@ -36,4 +36,12 @@ public class EmployeeService {
     public Employee save(Employee emp){
         return employeeRepo.save(emp);
     }
+
+    public String getProjectHost() {
+        return projectHost;
+    }
+
+    public void setProjectHost(String projectHost) {
+        this.projectHost = projectHost;
+    }
 }

@@ -1,0 +1,124 @@
+{
+  "consumer": {
+    "name": "employeeConsumer"
+  },
+  "interactions": [
+    {
+      "description": "Request for Employee Details",
+      "providerStates": [
+        {
+          "name": "Employee has atleast one project"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/project/employee/2"
+      },
+      "response": {
+        "body": [
+          {
+            "employeeId": 100,
+            "id": 100,
+            "projectName": "string",
+            "size": 2
+          },
+          {
+            "employeeId": 100,
+            "id": 100,
+            "projectName": "string",
+            "size": 2
+          }
+        ],
+        "generators": {
+          "body": {
+            "$[*].employeeId": {
+              "max": 2147483647,
+              "min": 0,
+              "type": "RandomInt"
+            },
+            "$[*].id": {
+              "max": 2147483647,
+              "min": 0,
+              "type": "RandomInt"
+            },
+            "$[*].projectName": {
+              "size": 20,
+              "type": "RandomString"
+            }
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 2
+                }
+              ]
+            },
+            "$[*].employeeId": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ]
+            },
+            "$[*].id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ]
+            },
+            "$[*].projectName": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$[*].size": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.3.2"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "projectProvider"
+  }
+}
